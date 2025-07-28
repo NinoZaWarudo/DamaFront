@@ -1,0 +1,52 @@
+<div class="flex flex-col items-center justify-center w-full relative z-10 p-4">
+  <div class="background"></div>
+
+  <div class="card">
+    <h1 class="card-title">{{ languageService.currentTranslations.supportPageTitle }}</h1>
+
+    <form [formGroup]="supportForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="email">{{ languageService.currentTranslations.supportEmailLabel }}</label>
+        <input id="email" type="email" formControlName="email" [placeholder]="languageService.currentTranslations.supportEmailPlaceholder" />
+        <div *ngIf="supportForm.get('email')?.invalid && (supportForm.get('email')?.dirty || supportForm.get('email')?.touched)" class="error-message">
+          <span *ngIf="supportForm.get('email')?.errors?.['required']">{{ languageService.currentTranslations.emailRequired }}</span>
+          <span *ngIf="supportForm.get('email')?.errors?.['email']">{{ languageService.currentTranslations.emailInvalid }}</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="subject">{{ languageService.currentTranslations.supportSubjectLabel }}</label>
+        <input id="subject" type="text" formControlName="subject" [placeholder]="languageService.currentTranslations.supportSubjectPlaceholder" />
+        <div *ngIf="supportForm.get('subject')?.invalid && (supportForm.get('subject')?.dirty || supportForm.get('subject')?.touched)" class="error-message">
+          <span *ngIf="supportForm.get('subject')?.errors?.['required']">{{ languageService.currentTranslations.supportSubjectRequired }}</span>
+          <span *ngIf="supportForm.get('subject')?.errors?.['minlength']">{{ languageService.currentTranslations.supportSubjectMinLength }}</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="message">{{ languageService.currentTranslations.supportMessageLabel }}</label>
+        <textarea id="message" formControlName="message" [placeholder]="languageService.currentTranslations.supportMessagePlaceholder" rows="5"></textarea>
+        <div *ngIf="supportForm.get('message')?.invalid && (supportForm.get('message')?.dirty || supportForm.get('message')?.touched)" class="error-message">
+          <span *ngIf="supportForm.get('message')?.errors?.['required']">{{ languageService.currentTranslations.supportMessageRequired }}</span>
+          <span *ngIf="supportForm.get('message')?.errors?.['minlength']">{{ languageService.currentTranslations.supportMessageMinLength }}</span>
+        </div>
+      </div>
+
+      <button class="btn" type="submit" [disabled]="supportForm.invalid || isLoading">
+        <span *ngIf="!isLoading">{{ languageService.currentTranslations.supportSendButton }}</span>
+        <span *ngIf="isLoading">{{ languageService.currentTranslations.loading }}</span>
+      </button>
+    </form>
+
+    <p *ngIf="statusMessage" class="mt-4 text-sm" [ngClass]="{'text-green-600': statusMessage === languageService.currentTranslations.supportSuccessMessage, 'text-red-600': statusMessage === languageService.currentTranslations.supportErrorMessage}">
+      {{ statusMessage }}
+    </p>
+
+    <p class="mt-4 text-sm text-gray-600">
+      {{ languageService.currentTranslations.supportDirectContact }}
+      <a href="mailto:support&#64;thenewdama.com" class="text-blue-600 hover:underline">support&#64;thenewdama.com</a>
+      {{ languageService.currentTranslations.supportOrCall }}
+      <a href="tel:+390811234567" class="text-blue-600 hover:underline">+39 081 1234567</a>
+    </p>
+  </div>
+</div>

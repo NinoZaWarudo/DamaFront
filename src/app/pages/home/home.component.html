@@ -1,0 +1,53 @@
+<div class="flex flex-col items-center w-full relative z-10 p-4">
+  <div class="background"></div>
+
+  <div class="flex flex-col md:flex-row items-center justify-center mb-8 w-full max-w-[930px]">
+    <div class="md:w-1/2 flex justify-center mb-6 md:mb-0">
+      <img src="assets/images/unnamed.png" alt="[Immagine di Dama]" class="rounded-lg shadow-lg w-[400px] h-[400px] object-cover">
+    </div>
+    <div class="md:w-1/2 text-center md:pl-8 flex flex-col items-center">
+      <h1 class="text-4xl md:text-4xl font-extrabold text-white mb-2 animate-fade-in-down text-center">
+        {{ languageService.currentTranslations.homeTitle }}
+      </h1>
+      <p class="text-lg text-gray-300 mb-2">
+        {{ languageService.currentTranslations.homeSubtitle }}
+      </p>
+
+      <div class="flex flex-col space-y-4 w-full max-w-xs mx-auto">
+        <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:scale-105 w-full text-lg uppercase tracking-wide">
+          {{ languageService.currentTranslations.homePlayOnlineButton }}
+        </button>
+        <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:scale-105 w-full text-lg uppercase tracking-wide">
+          {{ languageService.currentTranslations.homePlayVsComputerButton }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex flex-col md:flex-row items-center justify-center p-8 max-w-[930px] overflow-auto">
+    <div class="md:w-1/2 text-center md:text-left md:pr-8 mb-6 md:mb-0">
+      <h1 class="text-2xl font-bold text-white mb-4">
+        {{ languageService.currentTranslations.homeLearnToPlayTitle }}
+      </h1>
+      <p class="text-lg text-gray-300 mb-6">
+        {{ languageService.currentTranslations.homeLearnToPlayDescription }}
+      </p>
+
+      <div class="flex flex-col space-y-4 w-full max-w-xs mx-auto">
+        <a routerLink="/register" class="bg-[#8BC34A] hover:bg-[#7CB342] text-white font-bold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:scale-105 w-full text-lg uppercase tracking-wide">
+          {{ languageService.currentTranslations.homeRegisterButton }}
+        </a>
+        <a routerLink="/login" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:scale-105 w-full text-lg uppercase tracking-wide">
+          {{ languageService.currentTranslations.homeLoginButton }}
+        </a>
+      </div>
+    </div>
+    <div class="md:w-1/2 flex flex-col items-center justify-center">
+      <img src="assets/images/gaglia.png" alt="[Immagine di Gaglia]" class="rounded-lg shadow-lg w-[300px] h-[300px] object-cover mb-4">
+      <p class="text-sm italic text-gray-300 text-center px-4">
+        "La Dama è la mia vita non riesco a smettere di giocare mai, pure quando sono da solo mi sento ossessionato dalla Dama e ho il bisogno di giocare. Per fortuna che esiste "the new dama" senza di lei sarei morto" - <span class="text-red-500">Francesco Gaglianese</span>
+      </p>
+    </div>
+  </div>
+
+</div>

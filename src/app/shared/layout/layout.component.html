@@ -1,61 +1,9 @@
-<style>
+<div class="flex h-screen">
 
-  .navbar {
-    background-color: rgba(0, 0, 0, 0.85) !important;
-    border-bottom: 3px solid #c62828;
-  }
+  <app-navbar class="flex-shrink-0"></app-navbar>
 
-  .navbar-brand {
-    font-weight: bold;
-    font-size: 1.6rem;
-    color: #f5f5f5;
-    letter-spacing: 1px;
-  }
 
-  .navbar-nav .nav-link {
-    color: #f0f0f0 !important;
-    transition: color 0.3s;
-  }
-
-  .navbar-nav .nav-link:hover {
-    color: #c62828 !important;
-  }
-
-  main.container {
-    background-color: rgba(0, 0, 0, 0.8);
-    padding: 2rem;
-    border-radius: 12px;
-    margin-top: 2rem;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
-  }
-</style>
-
-<nav class="navbar navbar-expand-lg" data-bs-theme="dark">
-  <div class="container">
-    <a class="navbar-brand" href="#">
-      ♛ Dama 2077
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarNav" aria-controls="navbarNav"
-            aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" routerLink="dashboard">🏁 Dashboard</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="login">🔐 Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="register">🧾 Register</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<main class="container">
-  <router-outlet></router-outlet>
-</main>
+  <main class="flex-grow overflow-y-auto">
+    <router-outlet></router-outlet>
+  </main>
+</div>

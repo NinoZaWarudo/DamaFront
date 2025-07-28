@@ -1,23 +1,85 @@
-<div class="d-flex justify-content-center">
-  <div class="card" style="width: 26rem;">
-    <div class="card-body">
-      <h5 class="card-title">Register</h5>
-      <form [formGroup]="form" (submit)="onSubmit()">
-        <div class="mt-3">
-          <label for="name" class="form-label">Your Name</label>
-          <input type="text" class="form-control" formControlName="name" placeholder="Name">
+<div class="flex flex-col items-center justify-center w-full relative z-10 p-4">
+  <div class="background"></div>
+
+  <div class="card">
+    <h1 class="card-title">{{ languageService.currentTranslations.registerTitle }}</h1>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <div class="form-group">
+        <label for="name">{{ languageService.currentTranslations.nameLabel }}</label>
+        <input id="name" type="text" formControlName="name" [placeholder]="languageService.currentTranslations.namePlaceholder" />
+        <div *ngIf="form.get('name')?.invalid && (form.get('name')?.dirty || form.get('name')?.touched)" class="error-message">
+          <span *ngIf="form.get('name')?.errors?.['required']">{{ languageService.currentTranslations.nameRequired }}</span>
         </div>
-        <div class="mt-3">
-          <label for="email" class="form-label">Email Address</label>
-          <input type="email" class="form-control" formControlName="email" placeholder="Email Address">
+      </div>
+
+      <div class="form-group">
+        <label for="surname">{{ languageService.currentTranslations.surnameLabel }}</label>
+        <input id="surname" type="text" formControlName="surname" [placeholder]="languageService.currentTranslations.surnamePlaceholder" />
+        <div *ngIf="form.get('surname')?.invalid && (form.get('surname')?.dirty || form.get('surname')?.touched)" class="error-message">
+          <span *ngIf="form.get('surname')?.errors?.['required']">{{ languageService.currentTranslations.surnameRequired }}</span>
         </div>
-        <div class="mt-3">
-          <label for="password" class="form-label">Password</label>
-          <input type="password" class="form-control" formControlName="password" placeholder="Password">
+      </div>
+
+      <div class="form-group">
+        <label for="email">{{ languageService.currentTranslations.emailLabel }}</label>
+        <input id="email" type="email" formControlName="email" [placeholder]="languageService.currentTranslations.emailPlaceholder" />
+        <div *ngIf="form.get('email')?.invalid && (form.get('email')?.dirty || form.get('email')?.touched)" class="error-message">
+          <span *ngIf="form.get('email')?.errors?.['required']">{{ languageService.currentTranslations.emailRequired }}</span>
+          <span *ngIf="form.get('email')?.errors?.['email']">{{ languageService.currentTranslations.emailInvalid }}</span>
         </div>
-        <button type="submit" class="btn btn-success"[disabled]="form.invalid">Register</button>
-      </form>
-    </div>
+      </div>
+
+      <div class="form-group">
+        <label for="username">{{ languageService.currentTranslations.usernameLabel }}</label>
+        <input id="username" type="text" formControlName="username" [placeholder]="languageService.currentTranslations.usernamePlaceholder" />
+        <div *ngIf="form.get('username')?.invalid && (form.get('username')?.dirty || form.get('username')?.touched)" class="error-message">
+          <span *ngIf="form.get('username')?.errors?.['required']">{{ languageService.currentTranslations.usernameRequired }}</span>
+          <span *ngIf="form.get('username')?.errors?.['minlength']">{{ languageService.currentTranslations.usernameMinLength }}</span>
+          <span *ngIf="form.get('username')?.errors?.['maxlength']">{{ languageService.currentTranslations.usernameMaxLength }}</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">{{ languageService.currentTranslations.passwordLabel }}</label>
+        <div class="relative flex items-center">
+          <input [type]="passwordFieldType" id="password" formControlName="password" [placeholder]="languageService.currentTranslations.passwordPlaceholder" class="pr-32" />
+
+          <div *ngIf="passwordStrength" class="absolute right-10 pr-3 text-xs font-semibold"
+               style="top: 50%; transform: translateY(-50%); text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);"
+               [ngClass]="{
+                 'text-red-600': passwordStrength === languageService.currentTranslations.passwordStrengthWeak,
+                 'text-orange-500': passwordStrength === languageService.currentTranslations.passwordStrengthMedium,
+                 'text-yellow-400': passwordStrength === languageService.currentTranslations.passwordStrengthGood,
+                 'text-green-700': passwordStrength === languageService.currentTranslations.passwordStrengthStrong
+               }">
+            {{ passwordStrength }}
+          </div>
+
+          <span class="absolute right-0 pr-3 cursor-pointer" style="top: 50%; transform: translateY(-50%);" (click)="togglePasswordVisibility()">
+            <svg *ngIf="passwordFieldType === 'password'" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-400 hover:text-white">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <svg *ngIf="passwordFieldType === 'text'" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-400 hover:text-white">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.981 12H12m0 0l-3.981 3.981M12 12L8.019 8.019M12 12v7.981M12 12L16.019 8.019M12 12v-7.981M12 12L16.019 15.981" />
+            </svg>
+          </span>
+        </div>
+        <div *ngIf="form.get('password')?.invalid && (form.get('password')?.dirty || form.get('password')?.touched)" class="error-message">
+          <span *ngIf="form.get('password')?.errors?.['required']">{{ languageService.currentTranslations.passwordRequired }}</span>
+          <span *ngIf="form.get('password')?.errors?.['minlength']">{{ languageService.currentTranslations.passwordMinLength }}</span>
+          <span *ngIf="form.get('password')?.errors?.['maxlength']">{{ languageService.currentTranslations.passwordMaxLength }}</span>
+          <span *ngIf="form.get('password')?.errors?.['pattern']">{{ languageService.currentTranslations.passwordPattern }}</span>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="form.invalid || isLoading" class="btn">
+        <span *ngIf="!isLoading">{{ languageService.currentTranslations.registerButton }}</span>
+        <span *ngIf="isLoading">{{ languageService.currentTranslations.loading }}</span>
+      </button>
+    </form>
+
+    <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
   </div>
 </div>
-
